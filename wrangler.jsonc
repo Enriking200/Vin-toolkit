@@ -1,7 +1,13 @@
 {
   "name": "vin-toolkit",
   "compatibility_date": "2026-08-29",
+  "main": "src/worker.js",
   "assets": {
-    "directory": "public"
-  }
+    "directory": "public",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*"]
+  },
+  "kv_namespaces": [
+    { "binding": "VIN_CACHE", "id": "3a68f17a7b41449799aef3a44575ef70" }
+  ]
 }
