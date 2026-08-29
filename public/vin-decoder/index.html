@@ -3,11 +3,53 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="noindex">
-<title>Free VIN Decoder — Test</title>
+<title>Free VIN Decoder — Check Vehicle Specs & Recalls Instantly</title>
+<meta name="description" content="Decode any VIN for free. Get make, model, year, engine, plant info and open safety recalls in seconds. No sign-up required.">
+<link rel="canonical" href="https://vin-toolkit.enriquebaezamatas.workers.dev/vin-decoder/">
+<meta property="og:title" content="Free VIN Decoder — Check Vehicle Specs & Recalls Instantly">
+<meta property="og:description" content="Decode any VIN for free. No sign-up required.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://vin-toolkit.enriquebaezamatas.workers.dev/vin-decoder/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Free VIN Decoder",
+  "url": "https://vin-toolkit.enriquebaezamatas.workers.dev/vin-decoder/",
+  "applicationCategory": "UtilityApplication",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is this VIN decoder really free?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. There is no sign-up, no email requirement and no hidden fee. Results come directly from NHTSA's public vehicle database." }
+    },
+    {
+      "@type": "Question",
+      "name": "How accurate is the VIN decode?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Data comes from the official NHTSA vPIC database, built from manufacturer submissions required by U.S. federal regulation, making it the most authoritative free source available." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I check for recalls too?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. After decoding a VIN, click 'Check Recalls' to see any open safety recalls for that exact make, model and year." }
+    }
+  ]
+}
+</script>
 <style>
-  body { font-family: -apple-system, system-ui, sans-serif; background:#0f172a; color:#e2e8f0; margin:0; padding:24px 16px; }
-  .card { max-width: 480px; margin: 0 auto; }
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, system-ui, sans-serif; background:#0f172a; color:#e2e8f0; margin:0; }
+  header { padding:16px 20px; border-bottom:1px solid #1e293b; display:flex; justify-content:space-between; align-items:center; }
+  header a { color:#e2e8f0; text-decoration:none; font-weight:600; }
+  nav a { color:#94a3b8; text-decoration:none; margin-left:16px; font-size:0.9rem; }
+  main { max-width:480px; margin:0 auto; padding:24px 16px 48px; }
   input { width:100%; padding:12px; font-size:1rem; border-radius:8px; border:1px solid #334155; background:#1e293b; color:#e2e8f0; box-sizing:border-box; text-transform:uppercase; }
   button { width:100%; padding:12px; margin-top:10px; font-size:1rem; border:none; border-radius:8px; background:#3b82f6; color:white; font-weight:600; }
   button.secondary { background:#334155; }
@@ -16,15 +58,27 @@
   .row { display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid #334155; font-size:0.9rem; gap:12px; }
   .recall-item { padding:12px 0; border-bottom:1px solid #334155; font-size:0.9rem; }
   .recall-item:last-child { border-bottom:none; }
-  .recall-item strong { color:#f87171; }
   .error { color:#f87171; margin-top:12px; }
   .ok { color:#4ade80; margin-top:12px; }
   h1 { font-size:1.3rem; }
   h2 { font-size:1rem; margin-top:0; }
+  .info { margin-top:48px; }
+  .info h2 { font-size:1.2rem; }
+  .info p { color:#94a3b8; font-size:0.95rem; line-height:1.5; }
+  .faq-item { margin-top:16px; }
+  .faq-item h3 { font-size:0.95rem; margin-bottom:4px; }
+  .faq-item p { color:#94a3b8; font-size:0.9rem; margin:0; }
 </style>
 </head>
 <body>
-<div class="card">
+<header>
+  <a href="/">VIN Toolkit</a>
+  <nav>
+    <a href="/how-to-read-a-vin/">Guide</a>
+  </nav>
+</header>
+
+<main>
   <h1>Free VIN Decoder</h1>
   <input id="vin" maxlength="17" placeholder="Enter 17-character VIN" autocapitalize="characters">
   <button id="decodeBtn">Decode VIN</button>
@@ -32,7 +86,25 @@
   <div id="result" class="result" style="display:none;"></div>
   <button id="recallBtn" class="secondary" style="display:none;">Check Recalls</button>
   <div id="recallsBox" class="recalls" style="display:none;"></div>
-</div>
+
+  <section class="info">
+    <h2>What does this tool check?</h2>
+    <p>Every vehicle sold in the U.S. since 1981 has a unique 17-character VIN (Vehicle Identification Number) that encodes its manufacturer, model, year, engine and more. This tool decodes that data directly from the National Highway Traffic Safety Administration's public database, then checks the same source for any open safety recalls affecting that exact make, model and year.</p>
+
+    <div class="faq-item">
+      <h3>Is this really free?</h3>
+      <p>Yes — no sign-up, no email, no hidden report fee.</p>
+    </div>
+    <div class="faq-item">
+      <h3>How accurate is it?</h3>
+      <p>Data comes from NHTSA's vPIC database, built from mandatory manufacturer filings — the most authoritative free source available.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Not sure how to read your VIN?</h3>
+      <p>See our <a href="/how-to-read-a-vin/" style="color:#60a5fa;">guide to reading a VIN</a> to understand what each position means.</p>
+    </div>
+  </section>
+</main>
 
 <script>
   const btn = document.getElementById('decodeBtn');
@@ -69,7 +141,6 @@
         return;
       }
       renderResult(data);
-
       if (data.make && data.model && data.modelYear) {
         lastVehicle = { make: data.make, model: data.model, year: data.modelYear };
         recallBtn.style.display = 'block';
@@ -92,12 +163,10 @@
       const params = new URLSearchParams(lastVehicle);
       const res = await fetch('/api/recalls?' + params);
       const data = await res.json();
-
       if (!res.ok) {
         recallsBox.innerHTML = `<div class="error">${data.error || 'Could not check recalls.'}</div>`;
         return;
       }
-
       renderRecalls(data);
     } catch (err) {
       recallsBox.innerHTML = '<div class="error">Network error checking recalls.</div>';
@@ -126,14 +195,12 @@
       recallsBox.innerHTML = `<div class="ok">✅ No open recalls found for ${data.year} ${data.make} ${data.model}.</div>`;
       return;
     }
-
     const items = data.recalls.map(r => `
       <div class="recall-item">
         <strong>${r.component || 'Recall'}</strong> ${r.reportDate ? '— ' + r.reportDate : ''}
         <div>${r.summary || ''}</div>
       </div>
     `).join('');
-
     recallsBox.innerHTML = `<h2>⚠️ ${data.count} open recall(s) found</h2>${items}`;
   }
 </script>
