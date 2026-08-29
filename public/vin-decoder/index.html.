@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Free VIN Decoder — Test</title>
+<style>
+  body { font-family: -apple-system, system-ui, sans-serif; background:#0f172a; color:#e2e8f0; margin:0; padding:24px 16px; }
+  .card { max-width: 480px; margin: 0 auto; }
+  input { width:100%; padding:12px; font-size:1rem; border-radius:8px; border:1px solid #334155; background:#1e293b; color:#e2e8f0; box-sizing:border-box; text-transform:uppercase; }
+  button { width:100%; padding:12px; margin-top:10px; font-size:1rem; border:none; border-radius:8px; background:#3b82f6; color:white; font-weight:600; }
+  button:disabled { opacity:0.6; }
+  .result { margin-top:20px; background:#1e293b; border-radius:8px; padding:16px; }
+  .row { display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid #334155; font-size:0.9rem; gap:12px; }
+  .error { color:#f87171; margin-top:12px; }
+  h1 { font-size:1.3rem; }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>Free VIN Decoder</h1>
+  <input id="vin" maxlength="17" placeholder="Enter 17-character VIN" autocapitalize="characters">
+  <button id="decodeBtn">Decode VIN</button>
+  <div id="error" class="error"></div>
+  <div id="result" class="result" style="display:none;"></div>
+</div>
+
+<script>
+  const btn = document.getElementById('decodeBtn');
+  const input = document.getElementById('vin');
+  const errorEl = document.getElementById('error');
+  const resultEl = document.getElementById('result');
+  const VIN_REGEX = /^[A-HJ-NPR-Z0-9]{17}$/;
+
+  btn.addEventListener('click', async () => {
+    errorEl.textContent = '';
+    resultEl.style.display = 'none';
+    const vin = input.value.trim().toUpperCase();
+
+    if (!VIN_REGEX.test(vin)) {
+      errorEl.textContent = 'Please enter a valid 17-character VIN (no I, O or Q).';
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Decoding...';
+
+    try {
+      const res = await fetch('/api/decode?vin=' + encodeURIComponent(vin));
+      const data = await res.json();
+      if (!res.ok) {
+        errorEl.textContent = data.error || 'Something went wrong.';
+        return;
+      }
+      renderResult(data);
+    } catch (err) {
+      errorEl.textContent = 'Network error. Please try again.';
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Decode VIN';
+    }
+  });
+
+  function renderResult(data) {
+    const rows = [
+      ['Year', data.modelYear], ['Make', data.make], ['Model', data.model],
+      ['Vehicle Type', data.vehicleType], ['Body Class', data.bodyClass],
+      ['Drive Type', data.driveType], ['Engine Cylinders', data.engineCylinders],
+      ['Displacement (L)', data.displacementL], ['Fuel Type', data.fuelTypePrimary],
+      ['Doors', data.doors],
+      ['Plant', [data.plantCity, data.plantState, data.plantCountry].filter(Boolean).join(', ')],
+    ];
+    resultEl.innerHTML = rows.filter(([, v]) => v)
+      .map(([label, value]) => `<div class="row"><span>${label}</span><strong>${value}</strong></div>`)
+      .join('');
+    resultEl.style.display = 'block';
+  }
+</script>
+</body>
+</html>
