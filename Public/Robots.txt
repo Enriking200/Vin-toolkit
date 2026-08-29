@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vin-toolkit.enriquebaezamatas.workers.dev/sitemap.xml
