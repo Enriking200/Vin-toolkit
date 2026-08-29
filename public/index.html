@@ -1,19 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex">
-  <title>VIN Toolkit — Pipeline Test</title>
-  <style>
-    body { font-family: -apple-system, system-ui, sans-serif; background:#0f172a; color:#e2e8f0; display:flex; align-items:center; justify-content:center; height:100vh; margin:0; text-align:center; }
-    h1 { font-size: 1.4rem; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free VIN Decoder & Recall Checker | VIN Toolkit</title>
+<meta name="description" content="Decode any VIN for free and check open safety recalls instantly. No sign-up, no email required. Powered by official NHTSA data.">
+<link rel="canonical" href="https://vin-toolkit.enriquebaezamatas.workers.dev/">
+<meta property="og:title" content="Free VIN Decoder & Recall Checker">
+<meta property="og:description" content="Decode any VIN for free and check open safety recalls instantly. No sign-up required.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://vin-toolkit.enriquebaezamatas.workers.dev/">
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, system-ui, sans-serif; background:#0f172a; color:#e2e8f0; margin:0; }
+  header { padding:16px 20px; border-bottom:1px solid #1e293b; display:flex; justify-content:space-between; align-items:center; }
+  header a { color:#e2e8f0; text-decoration:none; font-weight:600; }
+  nav a { color:#94a3b8; text-decoration:none; margin-left:16px; font-size:0.9rem; }
+  main { max-width:640px; margin:0 auto; padding:40px 20px; }
+  h1 { font-size:1.8rem; line-height:1.2; }
+  p.lead { color:#94a3b8; font-size:1.05rem; }
+  .cta { display:inline-block; margin-top:16px; padding:14px 24px; background:#3b82f6; color:white; text-decoration:none; border-radius:8px; font-weight:600; }
+  .features { display:grid; gap:16px; margin-top:40px; }
+  .feature { background:#1e293b; border-radius:8px; padding:16px; }
+  .feature h3 { margin:0 0 6px; font-size:1rem; }
+  .feature p { margin:0; color:#94a3b8; font-size:0.9rem; }
+  footer { text-align:center; padding:24px; color:#64748b; font-size:0.85rem; }
+</style>
 </head>
 <body>
-  <div>
-    <h1>✅ Pipeline funcionando</h1>
-    <p>GitHub → Cloudflare Pages → aquí.</p>
+<header>
+  <a href="/">VIN Toolkit</a>
+  <nav>
+    <a href="/vin-decoder/">Decoder</a>
+    <a href="/how-to-read-a-vin/">Guide</a>
+  </nav>
+</header>
+
+<main>
+  <h1>Free VIN Decoder & Recall Checker</h1>
+  <p class="lead">Enter any 17-character VIN and instantly see the vehicle's specs and open safety recalls — straight from official U.S. government data. No account, no email, no hidden fees.</p>
+  <a class="cta" href="/vin-decoder/">Decode a VIN →</a>
+
+  <div class="features">
+    <div class="feature">
+      <h3>🔎 Official NHTSA data</h3>
+      <p>Every result comes directly from the National Highway Traffic Safety Administration's public database — the same source used by manufacturers.</p>
+    </div>
+    <div class="feature">
+      <h3>⚡ Instant, no sign-up</h3>
+      <p>No registration, no email capture, no waiting for a "report" to be emailed to you. Just type and see the result.</p>
+    </div>
+    <div class="feature">
+      <h3>⚠️ Recall check included</h3>
+      <p>See open safety recalls for the exact make, model and year in one click, right after decoding.</p>
+    </div>
   </div>
+</main>
+
+<footer>
+  Data provided by NHTSA. Not affiliated with any government agency.
+</footer>
 </body>
 </html>
